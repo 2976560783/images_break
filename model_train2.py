@@ -68,7 +68,7 @@ class ImageLoad(object):
         # # print(tensor.shape)
         # # print(tensor.dtype)
         # tensor = tf.image.resize(tensor, [64, 64])
-        image = preprocessing.image.load_img(path, target_size=(64, 64))
+        image = preprocessing.image.load_img(path, target_size=(60, 60))
         tensor = preprocessing.image.img_to_array(image)
         tensor /= 255
         # print(tensor)
@@ -84,7 +84,7 @@ class ImageLoad(object):
         files = os.listdir(self.train_path)
         datas = []
         labels = []
-        for file in files[:4]:
+        for file in files[:400]:
             path = self.train_path + file
             data_label = self.load_image(path)
             datas.append(data_label.data)
@@ -107,21 +107,22 @@ class ModelTrain(object):
 
     def model_build(self):
         model = models.Sequential()
-        model.add(layers.Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)))
+        model.add(layers.Conv2D(64, (3, 3), activation='relu', input_shape=(60, 60, 3)))
         model.add(layers.MaxPooling2D((2, 2)))
-        # model.add(layers.Conv2D(64, (3, 3), activation='relu'))
+        model.add(layers.Conv2D(128, (3, 3), activation='relu'))
+        model.add(layers.MaxPooling2D((2, 2)))
+        model.add(layers.Conv2D(256, (3, 3), activation='relu'))
+        model.add(layers.MaxPooling2D((2, 2)))
+        model.add(layers.Conv2D(512, (3, 3), activation='relu'))
         # model.add(layers.MaxPooling2D((2, 2)))
         # model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-        # model.add(layers.MaxPooling2D((2, 2)))
-        # model.add(layers.Conv2D(128, (3, 3), activation='relu'))
-        # model.add(layers.MaxPooling2D((2, 2)))
         model.add(layers.Flatten())
-        model.add(layers.Dense(126976, activation='relu'))
+        model.add(layers.Dense(2048, activation='relu'))
         model.add(layers.Dense(248, activation='softmax'))
 
         model.compile(loss=keras.losses.categorical_crossentropy,
                       optimizer='adam',
-                      metrics=['acc'])
+                      metrics=[keras.metrics.categorical_accuracy])
         model.summary()
         return model
 
@@ -129,6 +130,8 @@ class ModelTrain(object):
         data_set = ImageLoad().load_data_set()
         datas = data_set.datas
         labels = data_set.labels
+        va_datas = datas[:10]
+        va_labels = labels[:10]
         print(len(datas))
         # print(datas)
         print(len(labels))
@@ -137,8 +140,12 @@ class ModelTrain(object):
 
         model = self.model_build()
         model.fit(datas, labels,
+                  # steps_per_epoch=20,
                   epochs=10,
-                  batch_size=4)
+                  batch_size=4,
+                  validation_data=(va_datas, va_labels)
+                  # validation_steps=10
+                  )
 
 
 if __name__ == '__main__':
@@ -151,4 +158,4 @@ if __name__ == '__main__':
     # i.load_image(path)
     # # # i.load_data_set()
     ModelTrain().model_train()
-
+    # ModelTrain().model_build()
