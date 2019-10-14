@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-
+import enable_gpu_grow
 import numpy as np
 from create_images import CreateCaptcha
 from PIL import Image
@@ -51,7 +51,9 @@ class ImageLoad(object):
         return vec
 
     def vec2text(self, vec):
+        print(vec.shape)
         vec.resize((4, 62))
+        print(vec.shape)
         texts = []
         index = np.where(vec == 1.0)
         # print(index)
@@ -60,41 +62,43 @@ class ImageLoad(object):
             texts.append(self.captcha_list[j])
         return ''.join(texts)
 
+    def vec2text_for_result(self, vec):
+        print(vec.shape)
+        vec.resize((4, 62))
+        texts = []
+        print(vec.shape)
+        print(vec)
+        for i in vec:
+            index = np.argmax(i)
+            texts.append(self.captcha_list[index])
+        print(texts)
+        return ''.join(texts)
+
     def load_image(self, path):
-        # image = Image.open(path)
-        # tensor = np.array(image)
-        # # tensor = self.convert2gray(tensor)
-        # # print(tensor)
-        # # print(tensor.shape)
-        # # print(tensor.dtype)
-        # tensor = tf.image.resize(tensor, [64, 64])
         image = preprocessing.image.load_img(path, target_size=(60, 60))
         tensor = preprocessing.image.img_to_array(image)
         tensor /= 255
-        # print(tensor)
-        # # tf.Print(tensor)
-        # print(tensor.shape)
         name = path.split('/')[-1].split('__')[0]
         data_label = DataLabel()
         data_label.data = tensor
         data_label.label = self.text2vec(name)
+        # print(self.vec2text(data_label.label))
         return data_label
 
     def load_data_set(self):
         files = os.listdir(self.train_path)
         datas = []
         labels = []
-        for file in files[:400]:
+        for file in files[91: 102]:
             path = self.train_path + file
             data_label = self.load_image(path)
+            print(data_label.label.shape)
             datas.append(data_label.data)
             labels.append(data_label.label)
         data_set = DataSet()
         data_set.datas = np.array(datas)
         data_set.labels = np.array(labels)
-        # data_set.datas = np.reshape(data_set.datas, (4, 64*64*3))
-        print(data_set.datas.shape)
-        print(data_set.labels.shape)
+
         return data_set
 
     def gen_load_data_set(self):
@@ -140,12 +144,49 @@ class ModelTrain(object):
 
         model = self.model_build()
         model.fit(datas, labels,
-                  # steps_per_epoch=20,
-                  epochs=10,
+                  epochs=2,
                   batch_size=4,
                   validation_data=(va_datas, va_labels)
-                  # validation_steps=10
                   )
+        model.save('./historys/new.h5')
+
+    def model_test(self):
+        model = models.load_model('./historys/new.h5')
+        image = ImageLoad()
+        path = image.train_path + '02nh__6447343113148778.jpg'
+        # data_label = image.load_image(path)
+        # data = data_label.data
+        # label = data_label.label
+        # print(data)
+        # print(label)
+        # print(image.vec2text(label))
+        data_set = image.load_data_set()
+        test_datas = data_set.datas
+        results = model.predict(test_datas)
+        # print(results)
+        print(results.shape)
+        results = np.unique(results, axis=0)
+        print(results.shape)
+        # for result in results:
+        #     # print(result)
+        #     print(image.vec2text(result))
+        #     print(image.vec2text_for_result(result))
+
+
+    def model_eva(self):
+        model = models.load_model('./historys/new.h5')
+        image = ImageLoad()
+        data_set = image.load_data_set()
+        test_datas = data_set.datas
+        labels = data_set.labels
+        # loss, acc = model.evaluate(test_datas, labels)
+        # print(loss)
+        # print(acc)
+        results = model.predict(test_datas)
+        for result in results:
+            # image.vec2text_for_result(result)
+            ImageLoad().vec2text_for_result(result)
+
 
 
 if __name__ == '__main__':
@@ -157,5 +198,7 @@ if __name__ == '__main__':
     # path = i.train_path + '0a00__8920255655840348.jpg'
     # i.load_image(path)
     # # # i.load_data_set()
-    ModelTrain().model_train()
+    # ModelTrain().model_train()
     # ModelTrain().model_build()
+    # ModelTrain().model_test()
+    ModelTrain().model_eva()
