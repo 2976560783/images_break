@@ -40,7 +40,10 @@ def random_captcha_text(char_set=None, captcha_size=4):
 
 
 def gen_captcha_text_and_image(width=160, height=60, char_set=CHAR_SET):
-    image = ImageCaptcha(width=width, height=height)
+    path = './captcha_fonts/'
+    files = os.listdir(path)
+    path_fonts = [os.path.join(path, file) for file in files]
+    image = ImageCaptcha(width=width, height=height, fonts=path_fonts)
 
     captcha_text = random_captcha_text(char_set)
     captcha_text = ''.join(captcha_text)
@@ -137,6 +140,7 @@ def train():
         model = keras.models.load_model(from_path + '/' + '4460.h5')
         if model:
             print('load model success')
+            print('4460.h5')
             # print(file)
     except:
         model = model_build()
@@ -147,8 +151,13 @@ def train():
 
     for times in range(500000):
         batch_x, batch_y = get_next_batch(512)
+        train_datas = batch_x[:400]
+        train_labels = batch_y[:400]
+        val_datas = batch_x[400:]
+        val_labels = batch_y[400:]
         print('times=', times, ' batch_x.shape=', batch_x.shape, ' batch_y.shape=', batch_y.shape)
-        model.fit(batch_x, batch_y, epochs=4)
+        model.fit(train_datas, train_labels, epochs=4,
+                  validation_data=(val_datas, val_labels))
         # 下面一段程序表示是否在训练的时候进行识别
         # correct_count = 0
         # compares = []
