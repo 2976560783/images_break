@@ -47,12 +47,12 @@ def text2vec(text):
 def load_image(name):
     batch_size = 1
     store_path = './images/'
-    img = Image.open(store_path + '{}.jpg'.format(name))
+    img = Image.open(store_path + '{}'.format(name))
     # img.show()
     num_img = np.array(img)
     # print(num_img.shape)
     normal_img = img.resize((IMAGE_WIDTH, IMAGE_HEIGHT), Image.BILINEAR)
-    normal_img.show()
+    # normal_img.show()
     num_normal_img = np.array(normal_img)
     # print(num_normal_img.shape)
     batch_x = np.zeros([batch_size, IMAGE_HEIGHT, IMAGE_WIDTH, 1])
@@ -72,14 +72,17 @@ def vec2text(vec):
 
 
 def predict():
-    model = keras.models.load_model('../test/4460.h5')
+    model = keras.models.load_model('../test_10_15/250.h5')
     if model:
         print('load model success')
-    for i in range(10):
+    files = os.listdir('./images')
+    for i in files:
         datas, labels = load_image(i)
         predict_value = model.predict(datas)
         predict_value = vec2text(np.argmax(predict_value, axis=2)[0])
-        print(predict_value)
+        print('predict: ', predict_value, '--', i.split('.')[0])
+        if predict_value.upper() == i.split('.')[0]:
+            print('predict: ', predict_value, 'true: ', i, 'ok----------------')
 
 if __name__ == '__main__':
     # for i in range(10):

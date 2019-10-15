@@ -14,7 +14,7 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
             'v', 'w', 'x', 'y', 'z']
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
             'V', 'W', 'X', 'Y', 'Z']
-from_path = './test/'
+from_path = './test_10_15/250.h5'
 SAVE_PATH = "./test_10_15/"
 
 CHAR_SET = number + alphabet + ALPHABET
@@ -137,11 +137,10 @@ def train():
         # files.sort()
         # print(files)
         # file = files.pop()
-        model = keras.models.load_model(from_path + '/' + '4460.h5')
+        model = keras.models.load_model(from_path)
         if model:
             print('load model success')
-            print('4460.h5')
-            # print(file)
+            print(from_path)
     except:
         model = model_build()
 
