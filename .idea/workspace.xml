@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9a537a06-ff7e-49e5-a953-0f6c4148d279" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/model_train3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tensor_tutor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_gpu_available.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/break_other_pictures/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/break_other_pictures/get_pictures.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model_train2.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_train2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model_train3.py" beforeDir="false" afterPath="$PROJECT_DIR$/model_train3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,8 +60,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.model_train3">
-    <configuration name="model_train2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.get_pictures">
+    <configuration name="get_pictures" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="images_break" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -70,12 +69,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/break_other_pictures" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/model_train2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/break_other_pictures/get_pictures.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,11 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.get_pictures" />
         <item itemvalue="Python.model_train3" />
         <item itemvalue="Python.test_gpu_available" />
         <item itemvalue="Python.tensor_tutor" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.model_train2" />
       </list>
     </recent_temporary>
   </component>
@@ -204,7 +203,7 @@
       <workItem from="1571022832576" duration="5450000" />
       <workItem from="1571033789069" duration="3977000" />
       <workItem from="1571037876927" duration="8386000" />
-      <workItem from="1571047733747" duration="1444000" />
+      <workItem from="1571047733747" duration="7360000" />
     </task>
     <servers />
   </component>
@@ -228,8 +227,9 @@
     <SUITE FILE_PATH="coverage/images_break$create_images2.coverage" NAME="create_images2 Coverage Results" MODIFIED="1570863624499" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/images_break$test_gpu_available.coverage" NAME="test_gpu_available Coverage Results" MODIFIED="1571048168932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/images_break$create_images.coverage" NAME="create_images Coverage Results" MODIFIED="1570866983494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/images_break$model_train3.coverage" NAME="model_train3 Coverage Results" MODIFIED="1571049096915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/images_break$model_train3.coverage" NAME="model_train3 Coverage Results" MODIFIED="1571102535996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/images_break$tensor_tutor.coverage" NAME="tensor_tutor Coverage Results" MODIFIED="1571043830548" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/images_break$get_pictures.coverage" NAME="get_pictures Coverage Results" MODIFIED="1571102728819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/break_other_pictures" />
     <SUITE FILE_PATH="coverage/images_break$model_train2.coverage" NAME="model_train2 Coverage Results" MODIFIED="1571032672470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/images_break$test.coverage" NAME="test Coverage Results" MODIFIED="1571040470662" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

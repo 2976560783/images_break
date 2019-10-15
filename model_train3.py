@@ -14,7 +14,9 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
             'v', 'w', 'x', 'y', 'z']
 ALPHABET = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
             'V', 'W', 'X', 'Y', 'Z']
-SAVE_PATH = "./test/"
+from_path = './test/'
+SAVE_PATH = "./test_10_15/"
+
 CHAR_SET = number + alphabet + ALPHABET
 # CHAR_SET = number
 CHAR_SET_LEN = len(CHAR_SET)
@@ -90,6 +92,8 @@ def get_next_batch(batch_size=128):
 
     for i in range(batch_size):
         text, image = wrap_gen_captcha_text_and_image()
+        img = Image.fromarray(image)
+        # img.show()
         image = tf.reshape(convert2gray(image), (IMAGE_HEIGHT, IMAGE_WIDTH, 1))
         # print(image.shape)
         # print(image)
@@ -126,14 +130,14 @@ def model_build():
 
 def train():
     try:
-        files = os.listdir(SAVE_PATH)
-        files.sort()
-        print(files)
-        file = files.pop()
-        model = keras.models.load_model(SAVE_PATH + '/' + file)
+        # files = os.listdir(SAVE_PATH)
+        # files.sort()
+        # print(files)
+        # file = files.pop()
+        model = keras.models.load_model(from_path + '/' + '4460.h5')
         if model:
             print('load model success')
-            print(file)
+            # print(file)
     except:
         model = model_build()
 
